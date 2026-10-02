@@ -31,7 +31,7 @@ pick() {
   local b msg
   for b in ${ORDER//,/ }; do
     case "$b" in
-      claude|codex)
+      claude|codex|antigravity|agy|gemini|gpt)
         msg=$("$DIR/quota.sh" --gate "$b" "$TH") && { echo "$b"; return 0; }
         echo "route: skip $b: ${msg//$'\n'/; }" >&2 ;;
       opencode) command -v opencode >/dev/null && { echo opencode; return 0; } ;;
@@ -53,5 +53,6 @@ echo "route: using $B" >&2
 case "$B" in
   claude)   exec "${CLAUDE_BIN:-$HOME/.local/bin/claude}" -p $ROUTE_CLAUDE_ARGS "$PROMPT" </dev/null ;;
   codex)    exec "${CODEX_BIN:-codex}" exec $ROUTE_CODEX_ARGS "$PROMPT" </dev/null ;;
+  antigravity|agy|gemini|gpt) exec "${AGY_BIN:-agy}" $ROUTE_AGY_ARGS "$PROMPT" </dev/null ;;
   opencode) exec opencode run -m "${OPENCODE_MODEL:-opencode/big-pickle}" $ROUTE_OPENCODE_ARGS "$PROMPT" </dev/null ;;
 esac

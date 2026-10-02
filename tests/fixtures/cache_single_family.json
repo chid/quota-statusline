@@ -1,0 +1,30 @@
+[
+  {
+    "provider": "antigravity",
+    "source": "cli",
+    "usage": {
+      "extraRateWindows": [
+        {
+          "id": "antigravity-quota-summary-gemini-5h",
+          "title": "Gemini 5-hour",
+          "window": {
+            "resetsAt": "2026-10-02T05:10:10Z",
+            "windowMinutes": 300,
+            "resetDescription": "5h limit",
+            "usedPercent": 30.0
+          }
+        },
+        {
+          "id": "antigravity-quota-summary-gemini-weekly",
+          "title": "Gemini weekly",
+          "window": {
+            "resetsAt": "2026-10-07T11:07:15Z",
+            "windowMinutes": 10080,
+            "resetDescription": "weekly limit",
+            "usedPercent": 15.0
+          }
+        }
+      ]
+    }
+  }
+]

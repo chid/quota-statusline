@@ -1,0 +1,24 @@
+[
+  {
+    "provider": "antigravity",
+    "source": "cli",
+    "rateWindowLabels": {
+      "secondary": "Claude and GPT",
+      "primary": "Gemini Models"
+    },
+    "usage": {
+      "primary": {
+        "usedPercent": 50.0,
+        "resetDescription": "5h limit",
+        "windowMinutes": 300,
+        "resetsAt": "2026-10-02T05:10:10Z"
+      },
+      "secondary": {
+        "usedPercent": 80.0,
+        "resetDescription": "weekly limit",
+        "windowMinutes": 10080,
+        "resetsAt": "2026-10-02T05:12:24Z"
+      }
+    }
+  }
+]

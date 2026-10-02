@@ -1,11 +1,12 @@
 #!/bin/bash
 # Quota helper over CodexBar, cached so repeat calls are instant and token-free.
-#   quota.sh [codex|claude|both]        full summary
+#   quota.sh [codex|claude|agy|gemini|gpt|both] full summary
 #   quota.sh --brief                    one line, flags only tight windows
-#   quota.sh --gate <codex|claude> [N]  exit 0 ok, 1 tight (>=N% or pace-ahead), 2 stop (>=95%); default N=80
+#   quota.sh --gate <provider> [N]      exit 0 ok, 1 tight (>=N% or pace-ahead), 2 stop (>=95%); default N=80
+#                                       provider: codex | claude | agy | gemini | gpt
 #   quota.sh --line [--remaining]       compact status-line text; never blocks (refreshes cache in background)
-#                                       X=codex C=claude A=antigravity; --remaining (or QUOTA_SHOW=remaining) shows % left instead of % used
-#   quota.sh --wait <codex|claude>      sleep (no tokens) until any >=95% window resets, then re-check; exit 3 if wait > QUOTA_MAX_WAIT
+#                                       X=codex C=claude Ag=agy:gemini Ac=agy:gpt; --remaining (or QUOTA_SHOW=remaining) shows % left instead of % used
+#   quota.sh --wait <provider>          sleep (no tokens) until any >=95% window resets, then re-check; exit 3 if wait > QUOTA_MAX_WAIT
 #   quota.sh --refresh                  force refresh (single-flight: exits 1 if another refresh holds the lock)
 # Line extras: color by % used (green <QUOTA_WARN=60, yellow <QUOTA_CRIT=80, red above; QUOTA_COLOR=0 off) and a
 #   'Model ctx N%' prefix from Claude Code's stdin JSON (QUOTA_SESSION=0 off; QUOTA_STDIN_DUMP=/path saves the raw JSON to inspect fields).

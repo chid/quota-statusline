@@ -1,0 +1,28 @@
+[
+  {
+    "provider": "antigravity",
+    "source": "cli",
+    "usage": {
+      "extraRateWindows": [
+        {
+          "id": "antigravity-quota-summary-gemini-5h",
+          "title": "Gemini 5-hour",
+          "window": {
+            "resetsAt": "2026-10-02T05:10:10Z",
+            "windowMinutes": 300,
+            "usedPercent": 98.0
+          }
+        },
+        {
+          "id": "antigravity-quota-summary-3p-5h",
+          "title": "Claude/GPT 5-hour",
+          "window": {
+            "resetsAt": "2026-10-02T05:12:24Z",
+            "windowMinutes": 300,
+            "usedPercent": 20.0
+          }
+        }
+      ]
+    }
+  }
+]

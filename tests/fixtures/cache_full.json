@@ -1,0 +1,185 @@
+[
+  {
+    "version": "0.159.3",
+    "rateWindowLabels": {
+      "secondary": "Weekly",
+      "primary": "Session"
+    },
+    "provider": "codex",
+    "credits": {
+      "events": [],
+      "updatedAt": "2026-10-02T04:01:53Z",
+      "balanceIsWorkspace": false,
+      "remaining": 0,
+      "balanceReadSucceeded": false,
+      "creditsAvailable": true
+    },
+    "source": "oauth",
+    "usage": {
+      "codexResetCredits": {
+        "availableCount": 3,
+        "credits": [
+          {
+            "expires_at": "2026-10-04T23:24:11Z",
+            "granted_at": "2026-09-04T23:24:11Z",
+            "id": "codex-reset-credit-1",
+            "title": "Full reset (Weekly + 5 hr)",
+            "status": "available"
+          }
+        ],
+        "updatedAt": "2026-10-02T04:01:53Z"
+      },
+      "updatedAt": "2026-10-02T04:01:53Z",
+      "secondary": {
+        "windowMinutes": 10080,
+        "resetsAt": "2026-10-08T07:38:32Z",
+        "usedPercent": 55,
+        "resetDescription": "Oct 8 at 6:38 PM"
+      },
+      "primary": {
+        "windowMinutes": 300,
+        "resetsAt": "2026-10-02T06:38:12Z",
+        "usedPercent": 96,
+        "resetDescription": "4:38 PM"
+      },
+      "identity": {
+        "accountEmail": "test@example.com",
+        "loginMethod": "team",
+        "providerID": "codex"
+      },
+      "accountEmail": "test@example.com",
+      "loginMethod": "team"
+    },
+    "pace": {
+      "secondary": {
+        "deltaPercent": 43,
+        "stage": "farAhead",
+        "expectedUsedPercent": 12,
+        "willLastToReset": false,
+        "etaSeconds": 60056,
+        "summary": "43% in deficit | Expected 12% used | Runs out in 16h 41m"
+      },
+      "primary": {
+        "deltaPercent": 48,
+        "stage": "farAhead",
+        "expectedUsedPercent": 48,
+        "willLastToReset": false,
+        "etaSeconds": 359,
+        "summary": "48% in deficit | Expected 48% used | Projected empty in 6m"
+      }
+    }
+  },
+  {
+    "provider": "claude",
+    "source": "claude",
+    "usage": {
+      "secondary": {
+        "windowMinutes": 10080,
+        "resetsAt": "2026-10-03T13:59:00Z",
+        "usedPercent": 52,
+        "resetDescription": "resets Oct 3 at 11:59pm"
+      },
+      "primary": {
+        "windowMinutes": 300,
+        "resetsAt": "2026-10-02T08:29:00Z",
+        "usedPercent": 4,
+        "resetDescription": "resets Oct 2 at 6:29pm"
+      },
+      "updatedAt": "2026-10-02T04:02:03Z",
+      "identity": {
+        "loginMethod": "Docs 1",
+        "providerID": "claude"
+      },
+      "loginMethod": "Docs 1"
+    },
+    "rateWindowLabels": {
+      "secondary": "Weekly",
+      "primary": "Session"
+    },
+    "pace": {
+      "secondary": {
+        "deltaPercent": -28,
+        "stage": "farBehind",
+        "expectedUsedPercent": 80,
+        "willLastToReset": true,
+        "summary": "28% in reserve | Expected 80% used | Lasts until reset"
+      },
+      "primary": {
+        "deltaPercent": -6,
+        "stage": "behind",
+        "expectedUsedPercent": 11,
+        "willLastToReset": true,
+        "summary": "6% in reserve | Expected 11% used | Lasts until reset"
+      }
+    }
+  },
+  {
+    "provider": "antigravity",
+    "source": "cli",
+    "rateWindowLabels": {
+      "secondary": "Claude and GPT",
+      "primary": "Gemini Models"
+    },
+    "usage": {
+      "primary": {
+        "usedPercent": 57.30712115764618,
+        "resetDescription": "You have used some of your 5-hour limit, it will fully refresh in 1 hour, 9 minutes.",
+        "windowMinutes": 300,
+        "resetsAt": "2026-10-02T05:10:10Z"
+      },
+      "secondary": {
+        "usedPercent": 87.83127963542938,
+        "resetDescription": "You have used some of your 5-hour limit, it will fully refresh in 1 hour, 11 minutes.",
+        "windowMinutes": 300,
+        "resetsAt": "2026-10-02T05:12:24Z"
+      },
+      "updatedAt": "2026-10-02T04:00:42Z",
+      "tertiary": null,
+      "extraRateWindows": [
+        {
+          "id": "antigravity-quota-summary-gemini-5h",
+          "title": "Gemini 5-hour",
+          "window": {
+            "resetsAt": "2026-10-02T05:10:10Z",
+            "windowMinutes": 300,
+            "resetDescription": "You have used some of your 5-hour limit, it will fully refresh in 1 hour, 9 minutes.",
+            "usedPercent": 57.30712115764618
+          }
+        },
+        {
+          "id": "antigravity-quota-summary-gemini-weekly",
+          "title": "Gemini weekly",
+          "window": {
+            "resetsAt": "2026-10-07T11:07:15Z",
+            "windowMinutes": 10080,
+            "resetDescription": "You have used some of your weekly limit, it will fully refresh in 5 days, 7 hours.",
+            "usedPercent": 21.03438377380371
+          }
+        },
+        {
+          "id": "antigravity-quota-summary-3p-5h",
+          "title": "Claude/GPT 5-hour",
+          "window": {
+            "resetsAt": "2026-10-02T05:12:24Z",
+            "windowMinutes": 300,
+            "resetDescription": "You have used some of your 5-hour limit, it will fully refresh in 1 hour, 11 minutes.",
+            "usedPercent": 87.83127963542938
+          }
+        },
+        {
+          "id": "antigravity-quota-summary-3p-weekly",
+          "title": "Claude/GPT weekly",
+          "window": {
+            "resetsAt": "2026-10-07T08:13:03Z",
+            "windowMinutes": 10080,
+            "resetDescription": "You have used some of your weekly limit, it will fully refresh in 5 days, 4 hours.",
+            "usedPercent": 43.429481983184814
+          }
+        }
+      ],
+      "identity": {
+        "providerID": "antigravity"
+      }
+    }
+  }
+]
