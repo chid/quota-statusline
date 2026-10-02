@@ -4,6 +4,8 @@ import subprocess
 import sys
 import unittest
 
+from datetime import datetime, timedelta, timezone
+
 DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.dirname(DIR)
 SUMMARIZE = os.path.join(PROJECT_DIR, "scripts", "summarize.py")
@@ -11,7 +13,23 @@ FIXTURES_DIR = os.path.join(DIR, "fixtures")
 
 def load_fixture(name):
     with open(os.path.join(FIXTURES_DIR, name), "r") as f:
-        return f.read()
+        data = json.load(f)
+    # Adjust resetsAt to future timestamps so tests never fail due to clock drift
+    now = datetime.now(timezone.utc)
+    def fix_dates(obj):
+        if isinstance(obj, dict):
+            for k, v in obj.items():
+                if k == "resetsAt" and isinstance(v, str):
+                    mins = obj.get("windowMinutes", 300)
+                    delta = timedelta(minutes=70 if mins <= 360 else 7200)
+                    obj[k] = (now + delta).strftime("%Y-%m-%dT%H:%M:%SZ")
+                else:
+                    fix_dates(v)
+        elif isinstance(obj, list):
+            for item in obj:
+                fix_dates(item)
+    fix_dates(data)
+    return json.dumps(data)
 
 def run_summarize(mode, args=None, stdin_data="", env_vars=None):
     cmd = [sys.executable, SUMMARIZE, mode]

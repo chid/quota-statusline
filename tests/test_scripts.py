@@ -1,3 +1,4 @@
+import json
 import os
 import shutil
 import subprocess
@@ -18,7 +19,25 @@ class TestScriptsIntegration(unittest.TestCase):
         self.cache_dir = os.path.join(self.tmp_dir, "codexbar-quota")
         os.makedirs(self.cache_dir, exist_ok=True)
         self.cache_file = os.path.join(self.cache_dir, "both.json")
-        shutil.copy(os.path.join(FIXTURES_DIR, "cache_full.json"), self.cache_file)
+        with open(os.path.join(FIXTURES_DIR, "cache_full.json"), "r") as f:
+            data = json.load(f)
+        from datetime import datetime, timedelta, timezone
+        now = datetime.now(timezone.utc)
+        def fix_dates(obj):
+            if isinstance(obj, dict):
+                for k, v in obj.items():
+                    if k == "resetsAt" and isinstance(v, str):
+                        mins = obj.get("windowMinutes", 300)
+                        delta = timedelta(minutes=70 if mins <= 360 else 7200)
+                        obj[k] = (now + delta).strftime("%Y-%m-%dT%H:%M:%SZ")
+                    else:
+                        fix_dates(v)
+            elif isinstance(obj, list):
+                for item in obj:
+                    fix_dates(item)
+        fix_dates(data)
+        with open(self.cache_file, "w") as f:
+            json.dump(data, f)
         # Ensure cache timestamp is recent so TTL check passes
         os.utime(self.cache_file, None)
 

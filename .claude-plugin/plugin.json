@@ -1,0 +1,11 @@
+{
+  "name": "quota-statusline",
+  "description": "Color-coded Codex, Claude, and Antigravity quota status line built on CodexBar.",
+  "version": "0.2.0",
+  "author": {
+    "name": "Charley Peng"
+  },
+  "homepage": "https://github.com/chid/quota-statusline",
+  "repository": "https://github.com/chid/quota-statusline",
+  "license": "MIT"
+}

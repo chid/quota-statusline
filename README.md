@@ -23,14 +23,48 @@ Opus ctx 34% | X:100%!@27m/40%-- C:57%-/47%++ Ag:57%@1h09/21% Ac:88%!@1h11/43%
 
 ## Install
 
+### Option 1: Claude Code Plugin Marketplace (Recommended for Claude Code)
+
 ```bash
-./install.sh          # symlinks bin/quota-line into ~/.local/bin and prints the statusLine snippet
+claude plugin marketplace add chid/quota-statusline
+claude plugin install quota-statusline
+```
+
+### Option 2: One-line Shell Installer (Auto-configures ~/.claude/settings.json)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/chid/quota-statusline/main/install.sh | bash -s -- --configure
+```
+
+### Option 3: Agent Skill (skills.sh / Claude / Cursor / Codex / OpenCode)
+
+```bash
+npx skills add chid/quota-statusline
+```
+
+### Option 4: Homebrew Tap
+
+```bash
+brew tap chid/quota-statusline https://github.com/chid/quota-statusline
+brew install quota-statusline
+```
+
+### Option 5: Manual Clone
+
+```bash
+git clone https://github.com/chid/quota-statusline.git ~/.local/share/quota-statusline
+~/.local/share/quota-statusline/install.sh --configure
+```
+
+### Usage
+
+```bash
 quota-line            # print once
 quota-line --remaining
 quota-line --watch 30
 ```
 
-Requires `codexbar` on `PATH`, `python3` (`/usr/bin/python3`), and macOS (`stat -f`).
+Requires `codexbar` on `PATH` ([CodexBar](https://github.com/steipete/CodexBar) or `brew install --cask codexbar`), `python3` (`/usr/bin/python3`), and macOS (`stat -f`).
 
 ## How it works
 
