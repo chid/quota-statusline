@@ -1,0 +1,11 @@
+#!/bin/bash
+# Print the quota status line (Codex / Claude / Antigravity) from the terminal.
+#   quota-line [--remaining]     same flags/env as scripts/quota.sh --line
+#   quota-line --watch [secs]    redraw in place every N seconds (default 30)
+SELF="$0"; [ -L "$SELF" ] && SELF="$(readlink "$SELF")"   # works when symlinked onto PATH
+S="$(cd "$(dirname "$SELF")/../scripts" && pwd)/quota.sh"
+if [ "$1" = "--watch" ]; then
+  N="${2:-30}"; shift; [[ "$1" =~ ^[0-9]+$ ]] && shift
+  while :; do printf '\r\033[K%s' "$("$S" --line "$@" </dev/null 2>/dev/null)"; sleep "$N"; done
+fi
+exec "$S" --line "$@" </dev/null 2>/dev/null
