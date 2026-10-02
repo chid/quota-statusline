@@ -63,3 +63,7 @@ header of the script. `scripts/route.sh` runs a prompt on the first backend with
 
 - The stdin field names (`model.display_name`, `context_window.used_percentage`) are untested against the real payload; use `QUOTA_STDIN_DUMP` to check.
 - `--brief` labels agy's windows "5h/wk" although both are weekly; agy's 5-hour windows are not shown.
+
+## License
+
+MIT, see [LICENSE](LICENSE).
