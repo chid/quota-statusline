@@ -25,6 +25,10 @@ age() { [ -f "$CACHE" ] && echo $(( $(date +%s) - $(stat -f %m "$CACHE") )) || e
 # A lock is reclaimed when its holder is dead or it is older than QUOTA_LOCK_TTL (default 120s);
 # a stuck holder is killed (with its codexbar children) before the lock is taken over.
 LOCK="${CACHE%/*}/refresh.lock"
+# Attempt stamp: touched on every refresh attempt so a failing codexbar is retried at most once per TTL (cache mtime only moves on success).
+ATTEMPT="${CACHE%/*}/last_attempt"
+attempt_age() { [ -f "$ATTEMPT" ] && echo $(( $(date +%s) - $(stat -f %m "$ATTEMPT") )) || echo 999999; }
+due() { [ "$(age)" -gt "$TTL" ] && [ "$(attempt_age)" -gt "$TTL" ]; }
 LOCK_TTL="${QUOTA_LOCK_TTL:-120}"
 lock_age() { echo $(( $(date +%s) - $(stat -f %m "$LOCK" 2>/dev/null || date +%s) )); }
 acquire() {
@@ -43,7 +47,8 @@ acquire() {
 }
 refresh() {
   acquire || return 1
-  trap 'rm -rf "$LOCK"' EXIT
+  trap 'rm -rf "$LOCK" "$CACHE.$$" "$CACHE.agy.$$"' EXIT
+  touch "$ATTEMPT"
   _refresh
 }
 _refresh() {
@@ -59,14 +64,14 @@ _refresh() {
   done
   rm -f "$tmp" "$agy"; return 1
 }
-ensure() { [ "$(age)" -gt "$TTL" ] && refresh; [ -s "$CACHE" ]; }
+ensure() { due && refresh; [ -s "$CACHE" ]; }
 # stale = cache older than 2x TTL even after trying to refresh
 py() { QUOTA_STALE_MIN=$(( $(age) / 60 )) QUOTA_STALE=$([ "$(age)" -gt $(( TTL * 2 )) ] && echo 1 || echo 0) /usr/bin/python3 "$DIR/summarize.py" "$@" < "$CACHE"; }
 
 case "$1" in
   --refresh) refresh; exit $? ;;
   --line)
-    if [ "$(age)" -gt "$TTL" ]; then ( "$0" --refresh >/dev/null 2>&1 & ); fi
+    if due; then ( "$0" --refresh >/dev/null 2>&1 & ); fi
     [ "$2" = "--remaining" ] && export QUOTA_SHOW=remaining
     # Claude Code pipes session JSON (model, context window, ...) on stdin; never block waiting for it.
     if [ ! -t 0 ]; then QUOTA_STDIN="$(cat)"; export QUOTA_STDIN; fi
